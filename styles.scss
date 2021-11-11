@@ -1,0 +1,124 @@
+:root {
+	/* Fonts */
+	--title-font: "Mohave", sans-serif;
+	--body-font: "Open Sans", sans-serif;
+
+	/* Colors */
+	--red: hsl(0, 100%, 65%);
+}
+
+* {
+	box-sizing: border-box;
+	// margin: 0;
+	// padding: 0;
+
+	&::before,
+	&::after {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+}
+
+body {
+	display: flex;
+	align-items: center;
+	min-height: 100vh;
+	background-image: url("wood.jpg");
+	position: relative;
+}
+
+h2 {
+	margin-top: 10px;
+}
+
+.main {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	align-items: start;
+}
+
+.cards_item {
+	display: flex;
+	padding: 1rem;
+}
+
+.card_image {
+	max-height: 250px;
+}
+
+@media (min-width: 40rem) {
+	.cards_item {
+		width: 50%;
+	}
+}
+
+@media (min-width: 56rem) {
+	.cards_item {
+		width: 33.3333%;
+	}
+}
+
+.card {
+	background-color: white;
+	border-radius: 0.25rem;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.note {
+	// font-style: italic;
+	// font-size: 12px;
+	color: hsl(197, 3%, 46%);
+	font-family: var(--title-font);
+	// font-weight: lighter;
+}
+
+.card_content {
+	padding: 1rem;
+}
+
+.card_title,
+.card_text {
+	line-height: 24px;
+}
+
+.card_title {
+	font-family: var(--title-font);
+	// letter-spacing: 2px;
+	font-size: 28px;
+	text-transform: uppercase;
+}
+
+.card_price {
+	color: var(--red);
+	// margin-left: 20px;
+}
+
+.card_text {
+	font-family: var(--body-font);
+	font-size: 14px;
+}
+
+.card_btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	color: var(--red);
+	font-family: var(--body-font);
+	float: right;
+	margin-top: 10px;
+	font-weight: bold;
+	// letter-spacing: 1px;
+}
