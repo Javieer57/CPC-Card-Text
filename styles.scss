@@ -74,11 +74,15 @@ body {
 		border: none;
 		cursor: pointer;
 		font-size: 12px;
+		text-transform: capitalize;
 		color: var(--red);
 		font-family: var(--body-font);
 		float: right;
 		margin-top: 10px;
-		font-weight: bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
 		// letter-spacing: 1px;
 	}
 

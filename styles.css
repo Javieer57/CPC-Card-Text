@@ -68,11 +68,14 @@ body {
   border: none;
   cursor: pointer;
   font-size: 12px;
+  text-transform: capitalize;
   color: var(--red);
   font-family: var(--body-font);
   float: right;
   margin-top: 10px;
-  font-weight: bold;
+}
+.card_btn:hover {
+  text-decoration: underline;
 }
 .card_title {
   font-family: var(--title-font);

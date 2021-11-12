@@ -91,12 +91,40 @@
 	return shave;
 });
 
-let text = document.getElementsByClassName('card_text')[0].innerText;
-let card_text = document.getElementsByClassName('card_text')[0];
-let card_text_p = document.getElementsByClassName('card_text')[0].innerHTML;
-let btn = document.getElementById('btn');
+/* Colección HTML de todos los card_text */
+let cards = document.getElementsByClassName('card_text');
 
-function truncateText(text, letters = 100) {
+/* Guardar los textos planos en un arreglo*/
+let planeText = [];
+for (let i = 0; i < cards.length; i++) {	
+	planeText[i] = cards[i].innerText;
+}
+
+/* Guardar los textos con etiquetas */
+let htmlText = [];
+for (let i = 0; i < cards.length; i++) {	
+	htmlText[i] = cards[i].innerHTML;
+}
+
+/* Agregar a cada card el texto plano truncado */
+for (let i = 0; i < cards.length; i++) {
+	cards[i].innerHTML = truncateText(planeText[i]);
+}
+
+/* Agregar eventos a los botones de cada card */
+let btns = document.getElementsByClassName('card_btn');
+for (let i = 0; i < cards.length; i++) {
+	btns[i].addEventListener('click', function() {
+		if (cards[i].firstChild.className == 'truncate') {
+			cards[i].innerHTML = htmlText[i];
+		} else {
+			cards[i].innerHTML = truncateText(planeText[i]);
+		}
+	})	
+}
+
+/* Truncar textos planos */
+function truncateText(text, letters = 130) {
 	if (letters > text.length) {
 		return text;		
 	}
@@ -104,53 +132,3 @@ function truncateText(text, letters = 100) {
 	let truncate =  `<p class="truncate">${text.slice(0, letters)}...</p>`;
 	return truncate;
 }
-
-card_text.innerHTML = truncateText(text);
-
-btn.addEventListener('click', function () {
-	if (card_text.firstChild.className == 'truncate') {
-		card_text.innerHTML = card_text_p;
-	} else {
-		card_text.innerHTML = truncateText(text);
-	}
-})
-
-// card_text.innerHTML = card_text_p;
-
-// let nuevo_p = document.createElement("p");
-// nuevo_p.append("aslkdjasd");
-
-// card_text.append(nuevo_p);
-
-// alert();
-// console.log(card_text_p);
-// card_text.innerHTML = "hoo";
-// console.log(card_text_p);
-// alert();
-
-
-// card_text.append = `${card_text_p[0]} ${card_text_p[1]}`;
-
-// let module = document.getElementsByClassName("clamp");
-// shave(module, 90);
-
-// let contentHeight = document.getElementsByClassName("clamp")[0].offsetHeight;
-
-// let content = document.getElementsByClassName("card_text");
-
-// for (let i = 0; i < content.length; i++) {
-// 	content[i].style.height = contentHeight + 14 + "px";
-// }
-
-// let shaveDots = document.getElementsByClassName("js-shave-char");
-// let shaves = document.getElementsByClassName("js-shave");
-
-// let btn = document.getElementById("btn")
-
-// btn.addEventListener('click', function () {
-// 	for (let i = 0; i < content.length; i++) {
-// 		shaveDots[i].remove();
-// 		shaves[i].style.display = 'inline';
-// 		content[i].style.height = "auto";
-// 	}
-// });
