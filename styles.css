@@ -8,23 +8,16 @@
 
 * {
   box-sizing: border-box;
-}
-*::before, *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   display: flex;
   align-items: center;
   min-height: 100vh;
-  background-image: url("wood.jpg");
+  background-image: url("./wood.jpg");
   position: relative;
-}
-
-h2 {
-  margin-top: 10px;
 }
 
 .main {
@@ -40,14 +33,9 @@ h2 {
   padding: 0;
   align-items: start;
 }
-
 .cards_item {
   display: flex;
   padding: 1rem;
-}
-
-.card_image {
-  max-height: 250px;
 }
 
 @media (min-width: 40rem) {
@@ -68,36 +56,13 @@ h2 {
   flex-direction: column;
   overflow: hidden;
 }
-
-.note {
-  color: #727779;
-  font-family: var(--title-font);
+.card_image {
+  max-height: 250px;
 }
-
 .card_content {
-  padding: 1rem;
+  padding: 26px 16px 16px;
+  overflow: hidden;
 }
-
-.card_title,
-.card_text {
-  line-height: 24px;
-}
-
-.card_title {
-  font-family: var(--title-font);
-  font-size: 28px;
-  text-transform: uppercase;
-}
-
-.card_price {
-  color: var(--red);
-}
-
-.card_text {
-  font-family: var(--body-font);
-  font-size: 14px;
-}
-
 .card_btn {
   background: none;
   border: none;
@@ -108,6 +73,33 @@ h2 {
   float: right;
   margin-top: 10px;
   font-weight: bold;
+}
+.card_title {
+  font-family: var(--title-font);
+  font-size: 28px;
+  text-transform: uppercase;
+}
+.card_title_price {
+  color: var(--red);
+}
+.card_text {
+  font-family: var(--body-font);
+  font-size: 14px;
+  overflow: hidden;
+}
+.card_text p {
+  margin: 14px 0 0;
+}
+.card .card_title,
+.card .card_text {
+  line-height: 24px;
+}
+
+.note {
+  color: #727779;
+  font-family: var(--title-font);
+  display: inline-block;
+  margin-top: 5px;
 }
 
 /*# sourceMappingURL=styles.css.map */

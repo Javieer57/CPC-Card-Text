@@ -9,27 +9,16 @@
 
 * {
 	box-sizing: border-box;
-	// margin: 0;
-	// padding: 0;
-
-	&::before,
-	&::after {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
+	margin: 0;
+	padding: 0;
 }
 
 body {
 	display: flex;
 	align-items: center;
 	min-height: 100vh;
-	background-image: url("wood.jpg");
+	background-image: url("./wood.jpg");
 	position: relative;
-}
-
-h2 {
-	margin-top: 10px;
 }
 
 .main {
@@ -44,15 +33,11 @@ h2 {
 	margin: 0;
 	padding: 0;
 	align-items: start;
-}
 
-.cards_item {
-	display: flex;
-	padding: 1rem;
-}
-
-.card_image {
-	max-height: 250px;
+	&_item {
+		display: flex;
+		padding: 1rem;
+	}
 }
 
 @media (min-width: 40rem) {
@@ -74,51 +59,62 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+
+	&_image {
+		max-height: 250px;
+	}
+
+	&_content {
+		padding: 26px 16px 16px;
+		overflow: hidden;
+	}
+
+	&_btn {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: 12px;
+		color: var(--red);
+		font-family: var(--body-font);
+		float: right;
+		margin-top: 10px;
+		font-weight: bold;
+		// letter-spacing: 1px;
+	}
+
+	&_title {
+		font-family: var(--title-font);
+		// letter-spacing: 2px;
+		// margin-bottom: 20px;
+		font-size: 28px;
+		text-transform: uppercase;
+
+		&_price {
+			color: var(--red);
+			// margin-left: 20px;
+		}
+	}
+
+	&_text {
+		font-family: var(--body-font);
+		font-size: 14px;
+		// max-height: 75px;
+		overflow: hidden;
+
+		p {
+			margin: 14px 0 0;
+		}
+	}
+
+	.card_title,
+	.card_text {
+		line-height: 24px;
+	}
 }
 
 .note {
-	// font-style: italic;
-	// font-size: 12px;
 	color: hsl(197, 3%, 46%);
 	font-family: var(--title-font);
-	// font-weight: lighter;
-}
-
-.card_content {
-	padding: 1rem;
-}
-
-.card_title,
-.card_text {
-	line-height: 24px;
-}
-
-.card_title {
-	font-family: var(--title-font);
-	// letter-spacing: 2px;
-	font-size: 28px;
-	text-transform: uppercase;
-}
-
-.card_price {
-	color: var(--red);
-	// margin-left: 20px;
-}
-
-.card_text {
-	font-family: var(--body-font);
-	font-size: 14px;
-}
-
-.card_btn {
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: 12px;
-	color: var(--red);
-	font-family: var(--body-font);
-	float: right;
-	margin-top: 10px;
-	font-weight: bold;
-	// letter-spacing: 1px;
+	display: inline-block;
+	margin-top: 5px;
 }
