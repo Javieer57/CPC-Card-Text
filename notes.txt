@@ -4,3 +4,9 @@ fonts
 behance
 https://dollarshaveclub.github.io/shave/
 https://mx.depositphotos.com/
+
+title
+alt
+html markup
+
+mobile first

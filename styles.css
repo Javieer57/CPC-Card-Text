@@ -1,43 +1,123 @@
+/* Mohave & Open Sans Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Mohave:wght@300;700&family=Open+Sans&display=swap");
+/* Fonts & Colors */
 :root {
-  /* Fonts */
   --title-font: "Mohave", sans-serif;
   --body-font: "Open Sans", sans-serif;
-  /* Colors */
-  --red: hsl(0, 100%, 65%);
+  --orange: hsl(0, 100%, 65%);
+  --grey: hsl(197, 3%, 46%);
+  --dark: hsl(0, 0%, 16%);
+  --white: hsl(0, 0%, 100%);
 }
 
-* {
+/* General */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  background-image: url("./wood.jpg");
-  position: relative;
+::selection {
+  background-color: var(--orange);
+  color: var(--white);
 }
 
+body {
+  background-image: url("./wood.jpg");
+  color: var(--dark);
+}
+
+p {
+  margin: 0;
+}
+p:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+/* Layout */
 .main {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Typography */
+.card_title {
+  font-family: var(--title-font);
+  font-size: 28px;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.card_text p {
+  font-family: var(--body-font);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+/* Utilities */
+.orange {
+  color: var(--orange);
+}
+
+.note-sm {
+  color: var(--grey);
+  font-family: var(--title-font);
+  font-size: 14px;
+}
+
+/* Components */
 .cards {
+  align-items: start;
   display: flex;
   flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: start;
+  margin-top: 50px;
 }
 .cards_item {
   display: flex;
   padding: 1rem;
 }
 
+.card {
+  background-color: var(--white);
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.card_content {
+  padding: 26px 16px 16px;
+}
+.card_title {
+  margin-bottom: 5px;
+}
+.card_text {
+  margin: 16px 0;
+}
+.card_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  text-transform: capitalize;
+  font-family: var(--body-font);
+  float: right;
+}
+.card_btn:hover {
+  text-decoration: underline;
+}
+
+/* Media queries */
 @media (min-width: 40rem) {
   .cards_item {
     width: 50%;
@@ -47,62 +127,6 @@ body {
   .cards_item {
     width: 33.3333%;
   }
-}
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.card_image {
-  max-height: 250px;
-}
-.card_content {
-  padding: 26px 16px 16px;
-  overflow: hidden;
-}
-.card_btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  text-transform: capitalize;
-  color: var(--red);
-  font-family: var(--body-font);
-  float: right;
-  margin-top: 10px;
-}
-.card_btn:hover {
-  text-decoration: underline;
-}
-.card_title {
-  font-family: var(--title-font);
-  font-size: 28px;
-  text-transform: uppercase;
-}
-.card_title_price {
-  color: var(--red);
-}
-.card_text {
-  font-family: var(--body-font);
-  font-size: 14px;
-  overflow: hidden;
-}
-.card_text p {
-  margin: 14px 0 0;
-}
-.card .card_title,
-.card .card_text {
-  line-height: 24px;
-}
-
-.note {
-  color: #727779;
-  font-family: var(--title-font);
-  display: inline-block;
-  margin-top: 5px;
 }
 
 /*# sourceMappingURL=styles.css.map */
