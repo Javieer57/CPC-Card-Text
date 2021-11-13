@@ -1,134 +1,51 @@
 /**
-  shave - Shave is a javascript plugin that truncates multi-line text within a html element based on set max height
-  @version v2.5.9
-  @link https://github.com/yowainwright/shave#readme
-  @author Jeff Wainwright <yowainwright@gmail.com> (jeffry.in)
-  @license MIT
-**/
-(function (global, factory) {
-	typeof exports === "object" && typeof module !== "undefined"
-		? (module.exports = factory())
-		: typeof define === "function" && define.amd
-		? define(factory)
-		: ((global = global || self), (global.shave = factory()));
-})(this, function () {
-	"use strict";
-
-	function shave(target, maxHeight) {
-		var opts =
-			arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-		if (typeof maxHeight === "undefined" || isNaN(maxHeight))
-			throw Error("maxHeight is required");
-		var els =
-			typeof target === "string" ? document.querySelectorAll(target) : target;
-		if (!els) return;
-		var character = opts.character || "&mldr;";
-		var classname = opts.classname || "js-shave";
-		var spaces = typeof opts.spaces === "boolean" ? opts.spaces : true;
-		var charHtml = '<span class="js-shave-char">'.concat(character, "</span>");
-		if (!("length" in els)) els = [els];
-
-		for (var i = 0; i < els.length; i += 1) {
-			var el = els[i];
-			var styles = el.style;
-			var span = el.querySelector(".".concat(classname));
-			var textProp = el.textContent === undefined ? "innerText" : "textContent"; // If element text has already been shaved
-
-			if (span) {
-				// Remove the ellipsis to recapture the original text
-				el.removeChild(el.querySelector(".js-shave-char"));
-				el[textProp] = el[textProp]; // eslint-disable-line
-				// nuke span, recombine text
-			}
-
-			var fullText = el[textProp];
-			var words = spaces ? fullText.split(" ") : fullText; // If 0 or 1 words, we're done
-
-			if (words.length < 2) continue; // Temporarily remove any CSS height for text height calculation
-
-			var heightStyle = styles.height;
-			styles.height = "auto";
-			var maxHeightStyle = styles.maxHeight;
-			styles.maxHeight = "none"; // If already short enough, we're done
-
-			if (el.offsetHeight <= maxHeight) {
-				styles.height = heightStyle;
-				styles.maxHeight = maxHeightStyle;
-				continue;
-			} // Binary search for number of words which can fit in allotted height
-
-			var max = words.length - 1;
-			var min = 0;
-			var pivot = void 0;
-
-			while (min < max) {
-				pivot = (min + max + 1) >> 1; // eslint-disable-line no-bitwise
-
-				el[textProp] = spaces
-					? words.slice(0, pivot).join(" ")
-					: words.slice(0, pivot);
-				el.insertAdjacentHTML("beforeend", charHtml);
-				if (el.offsetHeight > maxHeight) max = pivot - 1;
-				else min = pivot;
-			}
-
-			el[textProp] = spaces ? words.slice(0, max).join(" ") : words.slice(0, max);
-			el.insertAdjacentHTML("beforeend", charHtml);
-			var diff = spaces
-				? " ".concat(words.slice(max).join(" "))
-				: words.slice(max);
-			var shavedText = document.createTextNode(diff);
-			var elWithShavedText = document.createElement("span");
-			elWithShavedText.classList.add(classname);
-			elWithShavedText.style.display = "none";
-			elWithShavedText.appendChild(shavedText);
-			el.insertAdjacentElement("beforeend", elWithShavedText);
-			styles.height = heightStyle;
-			styles.maxHeight = maxHeightStyle;
-		}
-	}
-
-	return shave;
-});
-
-/* Colección HTML de todos los card_text */
-let cards = document.getElementsByClassName('card_text');
-
-/* Guardar los textos planos en un arreglo*/
-let planeText = [];
-for (let i = 0; i < cards.length; i++) {	
-	planeText[i] = cards[i].innerText;
+ * Truncate a string
+ * @param {string} text - text you want to be truncate 
+ * @param {number} letters - number of letters in the truncated text
+ * @returns {string} - returns an truncated text within an <p> element to be insert as HTML
+ */
+function truncateText(text, letters = 130) {
+	let truncatedText = text.slice(0, letters);
+	let truncatedToHTML = `<p class="truncate">${truncatedText}...</p>`;
+	
+	return truncatedToHTML;
 }
 
-/* Guardar los textos con etiquetas */
+/* Select all card text containers */
+let cards = document.getElementsByClassName('card_text');
+
+/* Save texts within the cards as plain text */
+let plainText = [];
+for (let i = 0; i < cards.length; i++) {	
+	plainText[i] = cards[i].innerText;
+}
+
+/* Save the original card texts */
 let htmlText = [];
 for (let i = 0; i < cards.length; i++) {	
 	htmlText[i] = cards[i].innerHTML;
 }
 
-/* Agregar a cada card el texto plano truncado */
+/* Add truncated text inside the cards */
 for (let i = 0; i < cards.length; i++) {
-	cards[i].innerHTML = truncateText(planeText[i]);
+	cards[i].innerHTML = truncateText(plainText[i]);
 }
 
-/* Agregar eventos a los botones de cada card */
+/* Add events to all buttons */
 let btns = document.getElementsByClassName('card_btn');
-for (let i = 0; i < cards.length; i++) {
-	btns[i].addEventListener('click', function() {
+
+for (let i = 0; i < cards.length; i++){
+	btns[i].addEventListener('click', function () {
+		
+		/* If the first child in the card text container has 'truncate' class... */
 		if (cards[i].firstChild.className == 'truncate') {
+
+			/* Add their full text */
 			cards[i].innerHTML = htmlText[i];
 		} else {
-			cards[i].innerHTML = truncateText(planeText[i]);
+
+			/* Add their truncated text */
+			cards[i].innerHTML = truncateText(plainText[i]);
 		}
 	})	
-}
-
-/* Truncar textos planos */
-function truncateText(text, letters = 130) {
-	if (letters > text.length) {
-		return text;		
-	}
-	
-	let truncate =  `<p class="truncate">${text.slice(0, letters)}...</p>`;
-	return truncate;
 }

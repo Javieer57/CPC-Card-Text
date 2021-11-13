@@ -5,6 +5,7 @@
   --title-font: "Mohave", sans-serif;
   --body-font: "Open Sans", sans-serif;
   --orange: hsl(0, 100%, 65%);
+  --lighter-orange: hsl(0, 100%, 77%);
   --grey: hsl(197, 3%, 46%);
   --dark: hsl(0, 0%, 16%);
   --white: hsl(0, 0%, 100%);
@@ -20,13 +21,14 @@
 }
 
 ::selection {
-  background-color: var(--orange);
+  background-color: var(--lighter-orange);
   color: var(--white);
 }
 
 body {
   background-image: url("./wood.jpg");
   color: var(--dark);
+  font-family: var(--body-font);
 }
 
 p {
