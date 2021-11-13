@@ -1,13 +1,3 @@
-https://css-tricks.com/line-clampin/
-normalize
-fonts
-behance
-https://dollarshaveclub.github.io/shave/
-https://mx.depositphotos.com/
-https://youtu.be/cgBJQJzMkGw - Truncate a String - Basic Algorithm Scripting - Free Code Camp
-
 title
 alt
 html markup
-
-mobile first
